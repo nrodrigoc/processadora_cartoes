@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet  author="Nathan Jesus"  id="01022022175700_TABLE_TRANSACAO">
+
+        <preConditions onFail="CONTINUE">
+            <not>
+                <tableExists tableName="T_TRANSACAO"/>
+            </not>
+        </preConditions>
+
+        <!--        Criação das Sequences: -->
+        <createSequence sequenceName="S_TRANSACAO" incrementBy="1" startValue="1"/>
+
+        <!--        Criação das tabelas: -->
+        <createTable tableName="T_TRANSACAO">
+
+            <column name="ID" type="BIGINT" defaultValueSequenceNext="S_TRANSACAO">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="cartao_credito_id" type="int">
+                <constraints nullable="true" unique="false"
+                             foreignKeyName="fk_transacao_cartao_credito" references="t_cartao_credito(id)"/>
+            </column>
+            <column name="valor" type="float">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="fatura_id" type="int">
+                <constraints nullable="true" unique="false" foreignKeyName="fk_transacao_fatura" references="t_fatura(id)"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

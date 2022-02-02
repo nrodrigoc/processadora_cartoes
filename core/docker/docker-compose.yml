@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  db_core:
+    image: postgres:latest
+    container_name: db_core
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: core
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - /core/db/data:/var/lib/postgresql
+    ports:
+      - 5234:5432
+    networks:
+      - core-network
+
+networks:
+  core-network:
+    name: core-network

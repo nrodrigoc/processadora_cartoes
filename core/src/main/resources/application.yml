@@ -1,0 +1,35 @@
+micronaut:
+  application:
+    name: core
+
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5234/core
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    pool-name: core-pool
+    auto-commit: true
+    schema: public
+
+## Sem liquibase
+#jpa:
+#  default:
+#    packages-to-scan: br.ignus.core.entity
+#    properties:
+#      hibernate:
+#        hbm2ddl:
+#          auto: update
+
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+
+liquibase:
+  datasources:
+    default:
+      change-log: 'classpath:db/liquibase-changelog.xml'

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet  author="Nathan Jesus"  id="01022022145700_TABLE_PORTADOR">
+
+        <preConditions onFail="CONTINUE">
+            <not>
+                <tableExists tableName="T_PORTADOR"/>
+            </not>
+        </preConditions>
+
+<!--        Criação das Sequences: -->
+        <createSequence sequenceName="S_PORTADOR" incrementBy="1" startValue="1"/>
+
+
+<!--        Criação das tabelas: -->
+        <createTable tableName="T_PORTADOR">
+
+            <column name="ID" type="BIGINT" defaultValueSequenceNext="S_PORTADOR">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="NOME" type="VARCHAR(160)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>
